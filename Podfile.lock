@@ -11,7 +11,6 @@ DEPENDENCIES:
   - zipzap
 
 SPEC REPOS:
-  "git@github.com:gonativeio/gonative-specs.git":
     - GoNativeCore
     - MedianIcons
   trunk:

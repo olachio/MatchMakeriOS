@@ -5,7 +5,7 @@ on:
 
 jobs:
   build-ios:
-    name:  iOS Build
+    name: 🎉 iOS Build
     runs-on: macos-latest
 
     steps:
@@ -24,15 +24,16 @@ jobs:
         run: pod install --repo-update
         working-directory: MatchMakeriOS
 
-      - name: Set up Xcode
-        run: xcodebuild -workspace MatchMaker.xcworkspace -scheme MatchMaker -configuration Release -sdk iphoneos -derivedDataPath build
+      - name: Build Archive
+        run: xcodebuild -workspace MatchMaker.xcworkspace -scheme MatchMaker -configuration Release -sdk iphoneos -archivePath build/Build/Products/MatchMaker.xcarchive archive
+        working-directory: MatchMakeriOS
 
       - name: Build IPA
         run: |
           xcodebuild -exportArchive \
           -archivePath build/Build/Products/MatchMaker.xcarchive \
           -exportPath build/Build/Products \
-          -exportOptionsPlist MatchMakeriOS/ExportOptions.plist
+          -exportOptionsPlist MatchMaker/ExportOptions.plist
         working-directory: MatchMakeriOS
 
       - name: Rename IPA

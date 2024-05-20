@@ -22,29 +22,25 @@ jobs:
 
       - name: Install dependencies
         run: pod install --repo-update
-        working-directory: MatchMakeriOS
 
       - name: Build Archive
         run: xcodebuild -workspace MatchMaker.xcworkspace -scheme MatchMaker -configuration Release -sdk iphoneos -archivePath build/Build/Products/MatchMaker.xcarchive archive
-        working-directory: MatchMakeriOS
 
       - name: Build IPA
         run: |
           xcodebuild -exportArchive \
           -archivePath build/Build/Products/MatchMaker.xcarchive \
           -exportPath build/Build/Products \
-          -exportOptionsPlist MatchMaker/ExportOptions.plist
-        working-directory: MatchMakeriOS
+          -exportOptionsPlist ExportOptions.plist
 
       - name: Rename IPA
         run: mv build/Build/Products/MatchMaker.ipa build/Build/Products/MatchMakerExport.ipa
-        working-directory: MatchMakeriOS
 
       - name: Upload IPA to GitHub Releases
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: MatchMakeriOS/build/Build/Products/MatchMakerExport.ipa
+          file: build/Build/Products/MatchMakerExport.ipa
           tag: v1.0
           overwrite: true
           body: "This is the first release"

@@ -1,8 +1,8 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '13.0'
+platform :ios, '14.0'
 
 source 'https://cdn.cocoapods.org/'
-source 'https://github.com/gonativeio/gonative-ios.git'
+# source 'https://github.com/gonativeio/gonative-ios.git'
 
 require_relative './plugins.rb'
 
